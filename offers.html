@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>العروض — Luna Spa</title>
+<meta name="description" content="أحدث عروض Luna Spa على خدمات العناية والجمال في الرياض - حي إشبيليا. احجزي عرضك الآن.">
+<meta name="keywords" content="لونا سبا, Luna Spa, سبا الرياض, صالون تجميل الرياض, حي إشبيليا, حمام مغربي, حمام سوداني, تنظيف بشرة, تركيب أظافر, خدمات شعر">
+<meta property="og:title" content="Luna Spa — الرياض">
+<meta property="og:description" content="دلّلي نفسك... لأنك تستحقين الأفضل. تجربة متكاملة من العناية والجمال والاسترخاء في Luna Spa، حي إشبيليا، الرياض.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#3B2A22">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23C39A5C'/%3E%3Ctext x='50' y='63' font-size='45' text-anchor='middle' fill='white' font-family='serif'%3EL%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<a href="#" class="fab-whatsapp" data-whatsapp data-whatsapp-text="مرحباً Luna Spa، أرغب في الاستفسار عن خدماتكم" target="_blank" rel="noopener" aria-label="تواصلي معنا عبر واتساب">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+<button class="back-top" aria-label="العودة للأعلى"><i class="fa-solid fa-arrow-up"></i></button>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">L</span>
+      <span class="brand-name">Luna Spa<span>@lunasalon24</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html">الرئيسية</a>
+      <a href="services.html">الخدمات</a>
+      <a href="offers.html">العروض</a>
+      <a href="gallery.html">معرض الأعمال</a>
+      <a href="booking.html">الحجز</a>
+      <a href="index.html#about">من نحن</a>
+      <a href="contact.html">تواصل معنا</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="booking.html" class="btn btn-primary btn-sm">احجزي موعدك الآن</a>
+      <button class="nav-toggle" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+
+  <div class="mobile-menu">
+    <a href="index.html">الرئيسية</a>
+    <a href="services.html">الخدمات</a>
+    <a href="offers.html">العروض</a>
+    <a href="gallery.html">معرض الأعمال</a>
+    <a href="booking.html">الحجز</a>
+    <a href="index.html#about">من نحن</a>
+    <a href="contact.html">تواصل معنا</a>
+    <a href="booking.html" class="btn btn-primary btn-block">احجزي موعدك الآن</a>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="kicker">عروض لفترة محدودة</span>
+    <h1>عروض Luna Spa</h1>
+    <p class="breadcrumb"><a href="index.html">الرئيسية</a> / العروض</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p style="text-align:center;color:var(--brown-soft);max-width:560px;margin:-30px auto 50px;font-size:.92rem;">
+      الأسعار والعروض قابلة للتغيير حسب التوفر — يُرجى التواصل معنا عبر واتساب لتأكيد آخر تحديث قبل الحجز
+    </p>
+    <div class="grid grid-3" id="offers-wrap">
+      <!-- Offers are injected here by js/main.js — edit the OFFERS array in that file to update -->
+    </div>
+  </div>
+</section>
+
+<section class="section-tight section-alt">
+  <div class="container" style="text-align:center;">
+    <h2 style="font-size:1.9rem;">هل لديك سؤال عن أحد العروض؟</h2>
+    <p style="color:var(--brown-soft);margin-top:12px;">فريقنا جاهز للرد على استفساراتك وتأكيد حجزك بسرعة</p>
+    <a href="#" class="btn btn-whatsapp" style="margin-top:24px;" data-whatsapp data-whatsapp-text="مرحباً Luna Spa، لدي سؤال عن أحد العروض الحالية">
+      <i class="fa-brands fa-whatsapp"></i> تواصلي معنا عبر واتساب
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <h3>Luna Spa</h3>
+      <p>الجمال يبدأ من لحظة اهتمامك بنفسك ✨</p>
+      <div class="footer-social">
+        <a href="https://www.tiktok.com/@lunasalon24" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" data-whatsapp target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="services.html">الخدمات</a></li>
+        <li><a href="offers.html">العروض</a></li>
+        <li><a href="gallery.html">معرض الأعمال</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>تواصلي معنا</h4>
+      <ul>
+        <li><a href="booking.html">الحجز</a></li>
+        <li><a href="contact.html">تواصل معنا</a></li>
+        <li><a href="tel:0552333284">0552333284</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>الموقع</h4>
+      <ul>
+        <li><a href="contact.html">الرياض — حي إشبيليا</a></li>
+        <li><a href="https://www.tiktok.com/@lunasalon24" target="_blank" rel="noopener">@lunasalon24</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span class="cur-year">2026</span> Luna Spa. جميع الحقوق محفوظة.</div>
+</footer>
+
+<div class="lightbox">
+  <button class="lightbox-close" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+  <img src="" alt="">
+</div>
+
+<script src="js/supabase-client.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
