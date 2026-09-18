@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم Luna Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="mark">L</div>
+      <div><b>Luna Spa</b><span>لوحة التحكم</span></div>
+    </div>
+    <nav>
+      <button class="tab-btn active" data-tab="overview"><i class="fa-solid fa-gauge"></i> نظرة عامة</button>
+      <button class="tab-btn" data-tab="services"><i class="fa-solid fa-spa"></i> الخدمات</button>
+      <button class="tab-btn" data-tab="offers"><i class="fa-solid fa-tags"></i> العروض</button>
+      <button class="tab-btn" data-tab="gallery"><i class="fa-solid fa-images"></i> معرض الأعمال</button>
+      <button class="tab-btn" data-tab="bookings"><i class="fa-solid fa-calendar-check"></i> الحجوزات</button>
+      <button class="tab-btn" data-tab="messages"><i class="fa-solid fa-envelope"></i> رسائل التواصل</button>
+      <button class="tab-btn" data-tab="settings"><i class="fa-solid fa-gear"></i> إعدادات النشاط</button>
+    </nav>
+    <div class="logout">
+      <button id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button class="menu-toggle" id="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+        <h1 id="topbar-title">نظرة عامة</h1>
+      </div>
+      <span id="admin-email" style="color:var(--brown-soft);font-size:.85rem;"></span>
+    </div>
+
+    <div class="content">
+
+      <!-- ===================== OVERVIEW ===================== -->
+      <section class="tab-panel" id="tab-overview">
+        <div class="stats-grid">
+          <div class="stat-card"><span class="ic gold"><i class="fa-solid fa-spa"></i></span><div><b id="stat-services">—</b><span>إجمالي الخدمات</span></div></div>
+          <div class="stat-card"><span class="ic rose"><i class="fa-solid fa-tags"></i></span><div><b id="stat-offers">—</b><span>إجمالي العروض</span></div></div>
+          <div class="stat-card"><span class="ic blue"><i class="fa-solid fa-images"></i></span><div><b id="stat-gallery">—</b><span>صور المعرض</span></div></div>
+          <div class="stat-card"><span class="ic green"><i class="fa-solid fa-calendar-check"></i></span><div><b id="stat-bookings">—</b><span>إجمالي الحجوزات</span></div></div>
+          <div class="stat-card"><span class="ic rose"><i class="fa-solid fa-envelope"></i></span><div><b id="stat-messages">—</b><span>رسائل التواصل</span></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>أحدث الحجوزات</h2><button class="btn btn-outline btn-sm" data-goto="bookings">عرض الكل</button></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>الاسم</th><th>الخدمة</th><th>التاريخ</th><th>الحالة</th></tr></thead>
+              <tbody id="overview-bookings-body"><tr><td colspan="4" class="empty-row">جاري التحميل...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SERVICES ===================== -->
+      <section class="tab-panel" id="tab-services" style="display:none;">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>إدارة الخدمات</h2>
+            <button class="btn btn-primary btn-sm" id="add-service-btn"><i class="fa-solid fa-plus"></i> إضافة خدمة</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>الصورة</th><th>الاسم</th><th>الفئة</th><th>السعر</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+              <tbody id="services-body"><tr><td colspan="6" class="empty-row">جاري التحميل...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== OFFERS ===================== -->
+      <section class="tab-panel" id="tab-offers" style="display:none;">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>إدارة العروض</h2>
+            <button class="btn btn-primary btn-sm" id="add-offer-btn"><i class="fa-solid fa-plus"></i> إضافة عرض</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>العنوان</th><th>السعر القديم</th><th>السعر الجديد</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+              <tbody id="offers-body"><tr><td colspan="5" class="empty-row">جاري التحميل...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== GALLERY ===================== -->
+      <section class="tab-panel" id="tab-gallery" style="display:none;">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>إدارة معرض الأعمال</h2>
+            <button class="btn btn-primary btn-sm" id="add-gallery-btn"><i class="fa-solid fa-plus"></i> رفع صورة</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>الصورة</th><th>العنوان</th><th>الفئة</th><th>إجراءات</th></tr></thead>
+              <tbody id="gallery-body"><tr><td colspan="4" class="empty-row">جاري التحميل...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== BOOKINGS ===================== -->
+      <section class="tab-panel" id="tab-bookings" style="display:none;">
+        <div class="panel">
+          <div class="panel-head"><h2>حجوزات العميلات</h2></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>الاسم</th><th>الجوال</th><th>الخدمة</th><th>التاريخ</th><th>الوقت</th><th>ملاحظات</th><th>الحالة</th></tr></thead>
+              <tbody id="bookings-body"><tr><td colspan="7" class="empty-row">جاري التحميل...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CONTACT MESSAGES ===================== -->
+      <section class="tab-panel" id="tab-messages" style="display:none;">
+        <div class="panel">
+          <div class="panel-head"><h2>رسائل التواصل من الموقع</h2></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>الاسم</th><th>الجوال</th><th>الرسالة</th><th>التاريخ</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+              <tbody id="messages-body"><tr><td colspan="6" class="empty-row">جاري التحميل...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== SETTINGS ===================== -->
+      <section class="tab-panel" id="tab-settings" style="display:none;">
+        <div class="panel" style="max-width:640px;">
+          <div class="panel-head"><h2>إعدادات النشاط</h2></div>
+          <form id="settings-form">
+            <div class="field"><label>شعار النشاط</label>
+              <div class="upload-preview" id="logo-preview">لا يوجد شعار</div>
+              <input type="file" id="logo-file" accept="image/*">
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="s-name">اسم النشاط</label><input type="text" id="s-name" required></div>
+              <div class="field"><label for="s-phone">رقم الجوال</label><input type="tel" id="s-phone" required></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="s-whatsapp">رقم واتساب (بصيغة دولية، مثال 9665XXXXXXXX)</label><input type="text" id="s-whatsapp" required></div>
+              <div class="field"><label for="s-location">الموقع</label><input type="text" id="s-location" required></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label for="s-tiktok">رابط TikTok</label><input type="url" id="s-tiktok"></div>
+              <div class="field"><label for="s-instagram">رابط Instagram (اختياري)</label><input type="url" id="s-instagram"></div>
+            </div>
+            <div class="field"><label for="s-desc">الوصف (يظهر في قسم "من نحن")</label><textarea id="s-desc" rows="4"></textarea></div>
+            <button type="submit" class="btn btn-primary" id="settings-save-btn"><i class="fa-solid fa-check"></i> حفظ الإعدادات</button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SERVICE MODAL ===================== -->
+<div class="modal-overlay" id="service-modal">
+  <div class="modal">
+    <div class="modal-head"><h3 id="service-modal-title">إضافة خدمة</h3><button class="modal-close" data-close="service-modal"><i class="fa-solid fa-xmark"></i></button></div>
+    <form id="service-form">
+      <input type="hidden" id="svc-id">
+      <div class="field"><label>صورة الخدمة</label>
+        <div class="upload-preview" id="svc-preview">لا توجد صورة</div>
+        <input type="file" id="svc-file" accept="image/*">
+      </div>
+      <div class="field"><label for="svc-name">اسم الخدمة</label><input type="text" id="svc-name" required></div>
+      <div class="field-row">
+        <div class="field"><label for="svc-category">الفئة</label>
+          <select id="svc-category" required>
+            <option value="hair">الشعر</option><option value="skin">البشرة</option>
+            <option value="nails">الأظافر</option><option value="spa">السبا</option>
+          </select>
+        </div>
+        <div class="field"><label for="svc-price">السعر (ريال)</label><input type="number" id="svc-price" min="0" step="1"></div>
+      </div>
+      <div class="checkbox-field"><input type="checkbox" id="svc-price-request"><label for="svc-price-request" style="margin:0;">السعر عند الحجز (بدون سعر ثابت)</label></div>
+      <div class="field"><label for="svc-desc">الوصف</label><textarea id="svc-desc" rows="3"></textarea></div>
+      <div class="checkbox-field"><input type="checkbox" id="svc-active" checked><label for="svc-active" style="margin:0;">الخدمة مفعّلة (تظهر في الموقع)</label></div>
+      <div class="modal-foot">
+        <button type="submit" class="btn btn-primary btn-block" id="svc-save-btn">حفظ</button>
+        <button type="button" class="btn btn-outline" data-close="service-modal">إلغاء</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== OFFER MODAL ===================== -->
+<div class="modal-overlay" id="offer-modal">
+  <div class="modal">
+    <div class="modal-head"><h3 id="offer-modal-title">إضافة عرض</h3><button class="modal-close" data-close="offer-modal"><i class="fa-solid fa-xmark"></i></button></div>
+    <form id="offer-form">
+      <input type="hidden" id="ofr-id">
+      <div class="field"><label for="ofr-title">عنوان العرض</label><input type="text" id="ofr-title" required></div>
+      <div class="field"><label for="ofr-desc">الوصف</label><textarea id="ofr-desc" rows="2"></textarea></div>
+      <div class="field"><label for="ofr-services">الخدمات المشمولة (كل سطر: اسم الخدمة - السعر)</label>
+        <textarea id="ofr-services" rows="4" placeholder="تنظيف بشرة - 96 ريال
+قص شعر - 96 ريال"></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="ofr-old-price">السعر القديم (اختياري)</label><input type="number" id="ofr-old-price" min="0"></div>
+        <div class="field"><label for="ofr-new-price">السعر الجديد</label><input type="number" id="ofr-new-price" min="0"></div>
+      </div>
+      <div class="checkbox-field"><input type="checkbox" id="ofr-price-request"><label for="ofr-price-request" style="margin:0;">السعر عند الحجز</label></div>
+      <div class="field"><label for="ofr-valid">مدة/شروط العرض</label><input type="text" id="ofr-valid" placeholder="العرض ساري لفترة محدودة"></div>
+      <div class="checkbox-field"><input type="checkbox" id="ofr-active" checked><label for="ofr-active" style="margin:0;">العرض مفعّل (يظهر في الموقع)</label></div>
+      <div class="modal-foot">
+        <button type="submit" class="btn btn-primary btn-block" id="ofr-save-btn">حفظ</button>
+        <button type="button" class="btn btn-outline" data-close="offer-modal">إلغاء</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== GALLERY MODAL ===================== -->
+<div class="modal-overlay" id="gallery-modal">
+  <div class="modal">
+    <div class="modal-head"><h3>رفع صورة للمعرض</h3><button class="modal-close" data-close="gallery-modal"><i class="fa-solid fa-xmark"></i></button></div>
+    <form id="gallery-form">
+      <div class="field"><label>الصورة</label>
+        <div class="upload-preview" id="gal-preview">لا توجد صورة</div>
+        <input type="file" id="gal-file" accept="image/*" required>
+      </div>
+      <div class="field"><label for="gal-title">عنوان الصورة (اختياري)</label><input type="text" id="gal-title"></div>
+      <div class="field"><label for="gal-category">الفئة</label>
+        <select id="gal-category" required>
+          <option value="hair">الشعر</option><option value="skin">البشرة</option>
+          <option value="nails">الأظافر</option><option value="spa">السبا</option>
+        </select>
+      </div>
+      <div class="modal-foot">
+        <button type="submit" class="btn btn-primary btn-block" id="gal-save-btn">رفع الصورة</button>
+        <button type="button" class="btn btn-outline" data-close="gallery-modal">إلغاء</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/supabase-client.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
